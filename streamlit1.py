@@ -11,27 +11,16 @@ from openpyxl import load_workbook, Workbook
 
 st.title('Pronósticos')
 
-# data_file = st.file_uploader("Upload XLSX", type=["XLSX"]) # Diseño
+ data_file = st.file_uploader("Upload XLSX", type=["XLSX"]) # Diseño
 
-# if data_file is not None:
+ if data_file is not None:
     
-#     df_input = pd.read_excel(r"Planes.xlsx", sheet_name="Hoja1") # Se importan datos
+     df_input = pd.read_excel(r"Planes.xlsx") # Se importan datos
    
 
-file = st.file_uploader("Cargar archivo de Excel", type=["xlsx"])
 
-if file:
-    # Leer el archivo Excel
-    wb = openpyxl.load_workbook(file)
-    sheet = wb.active
 
-    # Leer datos desde el archivo Excel
-    data = []
-    for row in sheet.iter_rows(values_only=True):
-        data.append(row)
 
-    # Mostrar los datos en Streamlit
-    st.table(data)
 
 #traemos los datos
 #datos = pd.read_excel(r"Planes.xlsx")
