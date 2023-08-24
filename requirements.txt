@@ -3,3 +3,7 @@ streamlit-aggrid
 PuLP==2.7.0
 openpyxl
 plotly
+numpy
+seaborn 
+matplotlib
+mplcursors
