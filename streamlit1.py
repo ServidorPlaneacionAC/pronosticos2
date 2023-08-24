@@ -4,7 +4,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import mplcursors 
-st.title('Pronósticoshpppppppppppppp :chart_with_upwards_trend:')
+st.title('Pronósticos :chart_with_upwards_trend:')
 
 #traemos los datos
 st.set_option('deprecation.showPyplotGlobalUse', False) #para evitar el warning alert
@@ -58,7 +58,7 @@ if data_file is not None:
           del st.session_state['edited_df']
           st.text("Descargado🎈")
 
-with col3:
+  with col3:
     if st.button('Borrar cambios :wastebasket:'):
         st.session_state['edited_df']=datos.copy()
         st.text("Cambios borrados")
