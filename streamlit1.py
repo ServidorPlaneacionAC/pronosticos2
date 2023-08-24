@@ -1,55 +1,57 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import datetime as dt
-today=dt.datetime.now()
-from pkg_resources import resource_filename
-#import plotly.express as px
-#import seaborn as sns
-#import matplotlib.pyplot as plt
-from openpyxl import load_workbook, Workbook
+import seaborn as sns
+import matplotlib.pyplot as plt
+import mplcursors 
 
-st.title('Pronósticos')
+st.set_option('deprecation.showPyplotGlobalUse', False) #para evitar el warning alert
 
- data_file = st.file_uploader("Upload XLSX", type=["XLSX"]) # Diseño
-
- if data_file is not None:
-    
-     df_input = pd.read_excel(r"Planes.xlsx") # Se importan datos
-   
-
-
-
-
-
+st.title('Pronósticos :chart_with_upwards_trend:')
 #traemos los datos
-#datos = pd.read_excel(r"Planes.xlsx")
+datos=pd.read_excel('Planes.xlsx',dtype={'Año natural/Semana':str,'Material':str,'Año natural/Mes':str})
+datos['Año natural/Semana']=datos['Año natural/Semana'].apply(str)
+datos['Año natural/Mes']=datos['Año natural/Mes'].apply(str)
+materiales=datos['Material'].drop_duplicates().tolist() #creamos lista de materiales
+centros=datos['Centro'].drop_duplicates().tolist()
+sel_mat=st.selectbox('Material', materiales)#datos['Material'].drop_duplicates) seleccionar material
+sel_ce=st.selectbox('Centro',centros) #seleccionar centro
 
-#datos = pd.read_excel('C:/Users/ACjdpino/Desktop/Pronósticos panama/Pronosticos colombia/Visualización/Planes.xlsx')
-#materiales=datos['Material'].drop_duplicates().tolist() #creamos lista de materiales
-#sel_mes=st.select_slider('Mes',options=datos['Mes'].drop_duplicates() )
-#sel_sem=st.select_slider('Semana',options=datos['Año natural/Semana'].drop_duplicates())
-#sel_mat=st.selectbox('Material', materiales)#datos['Material'].drop_duplicates)
+sns.set(style="darkgrid",palette="pastel",rc={'figure.figsize':(12,8)})
 
+sns.lineplot(data=datos[(datos['Material']==sel_mat) & (datos['Centro']==sel_ce)],x='Año natural/Semana',y='Ajuste Plan final Línea',hue=datos['tipo_dato'],sort=True,style=datos['tipo_dato'],errorbar=None,palette=['purple','blue'], markers=True,)
+sns.axes_style({'ytick.direction': 'in'})
+fig=sns.mpl.pyplot.show()
+st.pyplot()
 
-#funcion para mostrar el dataframe que se cargo 
-#def mostrar_tabla(df):
-#st.write(df)
+cursor = mplcursors.cursor(fig, hover=True)
+cursor.connect("add", lambda sel: st.write(f'({sel.target[0]:.2f}, {sel.target[1]:.2f})'))
 
-#fig = px.line(datos, x=datos['Año natural/Semana'],y=datos['Ajuste Plan final Línea'], color=datos['tipo_dato'])
+edit_df=st.data_editor(data=datos[(datos['Material']==sel_mat) & (datos['Centro']==sel_ce)],disabled=['Año natural/Semana','Mes','Año natural/Mes','Material','DescMat','Centro','DescCe','tipo_dato']
+                       ,hide_index=True,width=1080, height=400)
 
-#st.plotly_chart(fig)
-#sns.set(style="darkgrid")
+col1, col2, col3 = st.columns(3)
 
-#sns.lineplot(data=datos,x='Año natural/Semana',y='Ajuste Plan final Línea',hue=datos['tipo_dato'],sort=True,style=datos['tipo_dato'],errorbar=None,palette=['purple','blue'], markers=True,)
+if 'edited_df' not in st.session_state:
+    st.session_state['edited_df']=datos.copy()
 
-#sns.mpl.pyplot.show()
-#st.pyplot()
+with col1:
+    if st.button("Guardar cambios :floppy_disk:"): 
+        #edited_df=edit_df.copy()
+        st.session_state['edited_df'].update(edit_df,overwrite=True)
+        st.text("Cambios guardados🎈")
 
-#edit_df=st.data_editor(datos,disabled=['Año natural/Semana','Mes','Año natural/Mes','Material','DescMat','Centro','DescCe','tipo_dato']
- #                      ,hide_index=True,width=1080, height=400)
+#st.write("Contenido de edited_df:")
+#st.write(edited_df)  # Imprime el contenido de edited_df
 
-#if st.button("Guardar cambios"):
- #   edited_df=edit_df.copy()
-    #new_df.to_excel('uno.xlsx', index=False)
-  #  st.write('Cambios guardados🎈')
+with col2:
+    if st.button('Descargar cambios :printer:'):
+        #datos.update(edit_df,overwrite=True)
+        st.session_state['edited_df'].to_excel('Pronosticos.xlsx', index=False) #exporta el original con los cambios
+        del st.session_state['edited_df']
+        st.text("Descargado🎈")
+
+with col3:
+    if st.button('Borrar cambios :wastebasket:'):
+        st.session_state['edited_df']=datos.copy()
+        st.text("Cambios borrados")
