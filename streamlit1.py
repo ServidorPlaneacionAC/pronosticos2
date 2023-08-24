@@ -4,12 +4,12 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import mplcursors 
-
+st.title('Pronósticos :chart_with_upwards_trend:')
+#traemos los datos
 st.set_option('deprecation.showPyplotGlobalUse', False) #para evitar el warning alert
 data_file = st.file_uploader("Upload XLSX", type=["XLSX"])
 
-st.title('Pronósticos :chart_with_upwards_trend:')
-#traemos los datos
+
 
 if data_file is not None:
     
