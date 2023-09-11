@@ -23,13 +23,23 @@ if data_file is not None:
   centros=datos['Centro'].drop_duplicates().tolist()
   sel_mat=st.selectbox('Material', materiales)#datos['Material'].drop_duplicates) seleccionar material
   sel_ce=st.selectbox('Centro',centros) #seleccionar centro
-  
+  #grafica
   sns.set(style="darkgrid",palette="pastel",rc={'figure.figsize':(12,8)})
   
-  sns.lineplot(data=datos[(datos['Material']==sel_mat) & (datos['Centro']==sel_ce)],x='Año natural/Semana',y='Ajuste Plan final Línea',hue=datos['tipo_dato'],sort=True,style=datos['tipo_dato'],errorbar=None,palette=['purple','blue'], markers=True,)
-  sns.axes_style({'ytick.direction': 'in'})
-  fig=sns.mpl.pyplot.show()
-  st.pyplot()
+  #sns.lineplot(data=datos[(datos['Material']==sel_mat) & (datos['Centro']==sel_ce)],x='Año natural/Semana',y='Ajuste Plan final Línea',hue=datos['tipo_dato'],sort=True,style=datos['tipo_dato'],errorbar=None,palette=['purple','blue'], markers=True,)
+  def update_graph():
+        ax.clear()
+        sns.lineplot(data=datos[(datos['Material'] == sel_mat) & (datos['Centro'] == sel_ce)], x='Año natural/Semana',
+                     y='Ajuste Plan final Línea', hue=datos['tipo_dato'], sort=True, style=datos['tipo_dato'],
+                     errorbar=None, palette=['purple', 'blue'], markers=True, ax=ax)
+        sns.axes_style({'ytick.direction': 'in'})
+        
+        st.pyplot()
+
+  update_graph() 
+  #sns.axes_style({'ytick.direction': 'in'})
+  #fig=sns.mpl.pyplot.show()
+  #st.pyplot()
   
   cursor = mplcursors.cursor(fig, hover=True)
   cursor.connect("add", lambda sel: st.write(f'({sel.target[0]:.2f}, {sel.target[1]:.2f})'))
@@ -47,7 +57,7 @@ if data_file is not None:
           #edited_df=edit_df.copy()
           st.session_state['edited_df'].update(edit_df,overwrite=True)
           st.text("Cambios guardados🎈")
-  
+          update_graph()
   #st.write("Contenido de edited_df:")
   #st.write(edited_df)  # Imprime el contenido de edited_df
   
