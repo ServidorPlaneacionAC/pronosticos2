@@ -58,8 +58,9 @@ if data_file is not None:
       if st.button("Guardar cambios :floppy_disk:"): 
           #edited_df=edit_df.copy()
           st.session_state['edited_df'].update(edit_df,overwrite=True)
-          st.text("Cambios guardados🎈")
           update_graph()
+          st.text("Cambios guardados🎈")
+          
   #st.write("Contenido de edited_df:")
   #st.write(edited_df)  # Imprime el contenido de edited_df
   
