@@ -29,9 +29,9 @@ if data_file is not None:
   #sns.lineplot(data=datos[(datos['Material']==sel_mat) & (datos['Centro']==sel_ce)],x='Año natural/Semana',y='Ajuste Plan final Línea',hue=datos['tipo_dato'],sort=True,style=datos['tipo_dato'],errorbar=None,palette=['purple','blue'], markers=True,)
   def update_graph():
         ax.clear()
-        sns.lineplot(data=datos[(datos['Material'] == sel_mat) & (datos['Centro'] == sel_ce)], x='Año natural/Semana',
-                     y='Ajuste Plan final Línea', hue=datos['tipo_dato'], sort=True, style=datos['tipo_dato'],
-                     errorbar=None, palette=['purple', 'blue'], markers=True, ax=ax)
+        sns.lineplot(data=st.session_state['edited_df'][(st.session_state['edited_df']['Material'] == sel_mat) & (st.session_state['edited_df']['Centro'] == sel_ce)], x='Año natural/Semana',
+                 y='Ajuste Plan final Línea', hue=st.session_state['edited_df']['tipo_dato'], sort=True, style=st.session_state['edited_df']['tipo_dato'],
+                 errorbar=None, palette=['purple', 'blue'], markers=True, ax=ax)
         sns.axes_style({'ytick.direction': 'in'})
         
         st.pyplot()
