@@ -25,7 +25,7 @@ if data_file is not None:
   sel_ce=st.selectbox('Centro',centros) #seleccionar centro
   #grafica
   sns.set(style="darkgrid",palette="pastel",rc={'figure.figsize':(12,8)})
-  
+  fig, ax = plt.subplots()
   #sns.lineplot(data=datos[(datos['Material']==sel_mat) & (datos['Centro']==sel_ce)],x='Año natural/Semana',y='Ajuste Plan final Línea',hue=datos['tipo_dato'],sort=True,style=datos['tipo_dato'],errorbar=None,palette=['purple','blue'], markers=True,)
   def update_graph():
         ax.clear()
