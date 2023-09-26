@@ -11,7 +11,7 @@ st.title('Pronósticos :chart_with_upwards_trend:')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 #desktop_dir = os.path.join(os.path.expanduser("~"), "Desktop")
-
+'''
 data_file = st.file_uploader("Upload XLSX", type=["XLSX"])
 
 # Variable para almacenar los datos originales
@@ -89,3 +89,4 @@ if data_file is not None:
         if st.button('Borrar cambios :wastebasket:'):
             st.session_state['edited_df'] = datos.copy()
             st.text("Cambios borrados")
+'''
