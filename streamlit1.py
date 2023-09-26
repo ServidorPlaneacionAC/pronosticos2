@@ -16,7 +16,7 @@ data_file = st.file_uploader("Upload XLSX", type=["XLSX"])
 
 # Variable para almacenar los datos originales
 datos_originales = None
-'''
+
 if data_file is not None:
     datos = pd.read_excel(data_file, dtype={'Año natural/Semana': str, 'Material': str, 'Año natural/Mes': str})
     datos['Año natural/Semana'] = datos['Año natural/Semana'].apply(str)
@@ -71,7 +71,7 @@ if data_file is not None:
             st.session_state['edited_df'].update(edit_df, overwrite=True)
             update_graph()
             st.text("Cambios guardados🎈")
-
+'''
     with col2:
         if st.button('Descargar cambios :printer:'):
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
