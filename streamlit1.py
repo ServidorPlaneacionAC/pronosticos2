@@ -84,9 +84,10 @@ if data_file is not None:
             )
 
             st.text("Descargado🎈")
-'''
+
     with col3:
         if st.button('Borrar cambios :wastebasket:'):
             st.session_state['edited_df'] = datos.copy()
             st.text("Cambios borrados")
+'''
 '''
