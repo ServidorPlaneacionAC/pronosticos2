@@ -71,7 +71,7 @@ if data_file is not None:
             st.session_state['edited_df'].update(edit_df, overwrite=True)
             update_graph()
             st.text("Cambios guardados🎈")
-'''
+
     with col2:
         if st.button('Descargar cambios :printer:'):
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -84,7 +84,7 @@ if data_file is not None:
             )
 
             st.text("Descargado🎈")
-
+'''
     with col3:
         if st.button('Borrar cambios :wastebasket:'):
             st.session_state['edited_df'] = datos.copy()
