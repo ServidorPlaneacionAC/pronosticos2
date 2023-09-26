@@ -4,7 +4,7 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 #import os
-#import tempfile
+import tempfile
 
 st.title('Pronósticos :chart_with_upwards_trend:')
 
