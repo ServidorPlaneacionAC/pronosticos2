@@ -3,14 +3,14 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import plotly.express as px
-import os
+#import os
 import tempfile
 
 st.title('Pronósticos :chart_with_upwards_trend:')
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-desktop_dir = os.path.join(os.path.expanduser("~"), "Desktop")
+#desktop_dir = os.path.join(os.path.expanduser("~"), "Desktop")
 
 data_file = st.file_uploader("Upload XLSX", type=["XLSX"])
 
