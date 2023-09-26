@@ -11,12 +11,12 @@ st.title('Pronósticos :chart_with_upwards_trend:')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 #desktop_dir = os.path.join(os.path.expanduser("~"), "Desktop")
-'''
+
 data_file = st.file_uploader("Upload XLSX", type=["XLSX"])
 
 # Variable para almacenar los datos originales
 datos_originales = None
-
+'''
 if data_file is not None:
     datos = pd.read_excel(data_file, dtype={'Año natural/Semana': str, 'Material': str, 'Año natural/Mes': str})
     datos['Año natural/Semana'] = datos['Año natural/Semana'].apply(str)
