@@ -7,6 +7,6 @@ numpy
 seaborn 
 matplotlib
 mplcursors
-plotly.express as px
+
 os
 tempfile
