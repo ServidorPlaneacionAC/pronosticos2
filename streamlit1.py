@@ -74,14 +74,15 @@ if data_file is not None:
 
     with col2:
         if st.button('Descargar cambios :printer:'):
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-                temp_file_path = temp_file.name
-                st.session_state['edited_df'].to_excel(temp_file_path, index=False)
-
-            st.markdown(
-                f'<a href="{temp_file_path}" download="Pronosticos.xlsx">Descargar Pronosticos.xlsx</a>',
-                unsafe_allow_html=True
-            )
+           # with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            #    temp_file_path = temp_file.name
+                #st.session_state['edited_df'].to_excel(temp_file_path, index=False)
+            st.session_state['edited_df'].to_excel('Pronosticos.xlsx', index=False) #exporta el original con los cambios
+            del st.session_state['edited_df']
+            #st.markdown(
+             #   f'<a href="{temp_file_path}" download="Pronosticos.xlsx">Descargar Pronosticos.xlsx</a>',
+              #  unsafe_allow_html=True
+            #)
 
             st.text("Descargado🎈")
 
