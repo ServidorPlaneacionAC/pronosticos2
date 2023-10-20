@@ -81,13 +81,13 @@ if data_file is not None:
 
     with col2:
          if st.button('Descargar cambios :printer:'):
-         edited_data = st.session_state['edited_df']
-        
-         # Crea un enlace para descargar los datos editados directamente
-         csv = edited_data.to_csv(index=False)
-         b64 = base64.b64encode(csv.encode()).decode()
-         href = f'<a href="data:file/csv;base64,{b64}" download="Datos_Editados.csv">Descargar datos editados</a>'
-         st.markdown(href, unsafe_allow_html=True)
+             edited_data = st.session_state['edited_df']
+            
+             # Crea un enlace para descargar los datos editados directamente
+             csv = edited_data.to_csv(index=False)
+             b64 = base64.b64encode(csv.encode()).decode()
+             href = f'<a href="data:file/csv;base64,{b64}" download="Datos_Editados.csv">Descargar datos editados</a>'
+             st.markdown(href, unsafe_allow_html=True)
         
          st.text("Descargado🎈")
     with col3:
