@@ -72,12 +72,12 @@ if data_file is not None:
             update_graph()
             st.text("Cambios guardados🎈")
 '''
-    with col2:
-        if st.button('Descargar cambios :printer:'):
+    #with col2:
+        #if st.button('Descargar cambios :printer:'):
            
-            st.session_state['edited_df'].to_excel(r'C:\Users\ACjdpino\Downloads\Pronosticos.xlsx', index=False) #exporta el original con los cambios
-            del st.session_state['edited_df']           
-            st.text("Descargado🎈")
+            #st.session_state['edited_df'].to_excel(r'C:\Users\ACjdpino\Downloads\Pronosticos.xlsx', index=False) #exporta el original con los cambios
+            #del st.session_state['edited_df']           
+            #st.text("Descargado🎈")
 '''
     with col2:
          if st.button('Descargar cambios :printer:'):
